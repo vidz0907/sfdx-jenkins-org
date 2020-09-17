@@ -2,11 +2,13 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "sfdxPkg",
+      "versionNumber": "0.0.1.NEXT"
     }
   ],
-  "namespace": "ns1",
+  "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "49.0",
-  "oaauthLocalPort": "1717"
+  "oauthLocalPort": 1717
 }

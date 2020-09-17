@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types>
+    <name>ApexClass</name>
+    <members>vidhiTestClass</members>
+  </types>
+  <types>
+    <name>AuraDefinitionBundle</name>
+    <members>testcomp</members>
+  </types>
+  <version>49.0</version>
+</Package>
