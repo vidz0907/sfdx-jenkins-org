@@ -1,4 +1,4 @@
-file=open("list.txt", "r")
+file=open("list.txt", "r", encoding = "utf-16")
 list = file.readlines()
 listUpdated=[]
 listMkdir=[]

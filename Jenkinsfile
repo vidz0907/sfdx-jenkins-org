@@ -5,11 +5,12 @@ node {
     def SF_CONSUMER_KEY=env.SF_CONSUMER_KEY
     def SF_USERNAME=env.SF_USERNAME
     def SERVER_KEY_CREDENTIALS_ID=env.SERVER_KEY_CREDENTIALS_ID
-    def DEPLOYDIR='force-app'
+	//def DEPLOYDIR='force-app'
     def TEST_LEVEL='RunLocalTests'
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://login.salesforce.com"
     def toolbelt = tool 'toolbelt'
-
+	def groovytool = tool 'groovytool'
+	def pythontool = tool 'pythontool'
 	println SF_CONSUMER_KEY
 	println SERVER_KEY_CREDENTIALS_ID
 
@@ -42,14 +43,41 @@ node {
 			error 'Salesforce org authorization failed.'
 		    }
 		}
-
-
+		// -------------------------------------------------------------------------
+		// Create Git Diff 
+		// -------------------------------------------------------------------------
+		stage('GitDiff') {
+		    rc = command "git diff-tree --no-commit-id --name-only -r head^ head > list.txt"
+			println(list.txt)
+		    if (rc != 0) {
+			error 'Git Diff Failed'
+		    }
+		}
+		// -------------------------------------------------------------------------
+		// Run Copy Delta files Script  
+		// -------------------------------------------------------------------------
+		stage('Copy Delta Files') {
+		    rc = command "${pythontool}/python .\copyDeltaFiles.py"
+		    if (rc != 0) {
+			error 'copy files script failed'
+		    }
+		}
+		// -------------------------------------------------------------------------
+		//Create Delta Pakcage   
+		// -------------------------------------------------------------------------
+		stage('Create Delta Pakcage') {
+		    rc = command "${groovytool}/groovy PackageXMLGenerator.groovy delta/force-app/main/default delta/force-app/main/default/package.xml"
+		    if (rc != 0) {
+			error 'copy files script failed'
+		    }
+		}
 		// -------------------------------------------------------------------------
 		// Deploy metadata and execute unit tests.
 		// -------------------------------------------------------------------------
 
 		stage('Deploy and Run Tests') {
-		    rc = command "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --targetusername vscodeOrg --testlevel ${TEST_LEVEL}"
+		    //rc = command "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --targetusername vscodeOrg --testlevel ${TEST_LEVEL}"
+			rc = command "${toolbelt}/sfdx force:mdapi:deploy -d delta/force-app/main/default -w 30"
 		    if (rc != 0) {
 			error 'Salesforce deploy and test run failed.'
 		    }
