@@ -43,34 +43,14 @@ node {
 			error 'Salesforce org authorization failed.'
 		    }
 		}
-		// -------------------------------------------------------------------------
-		// Create Git Diff 
-		// -------------------------------------------------------------------------
-		stage('GitDiff') {
-		    rc = command "git diff-tree --no-commit-id --name-only -r head^ head > list.txt"
-			println(list.txt)
+		//Run Powersehll Sript
+		stage('Run powershell') {
+			rc = command ".\run_import_script.ps1"
 		    if (rc != 0) {
-			error 'Git Diff Failed'
+			error 'Powershell failed'
 		    }
 		}
-		// -------------------------------------------------------------------------
-		// Run Copy Delta files Script  
-		// -------------------------------------------------------------------------
-		stage('Copy Delta Files') {
-		    rc = command "${pythontool}/python copyDeltaFiles.py"
-		    if (rc != 0) {
-			error 'copy files script failed'
-		    }
-		}
-		// -------------------------------------------------------------------------
-		//Create Delta Pakcage   
-		// -------------------------------------------------------------------------
-		stage('Create Delta Pakcage') {
-		    rc = command "${groovytool}/groovy PackageXMLGenerator.groovy delta/force-app/main/default delta/force-app/main/default/package.xml"
-		    if (rc != 0) {
-			error 'copy files script failed'
-		    }
-		}
+		
 		// -------------------------------------------------------------------------
 		// Deploy metadata and execute unit tests.
 		// -------------------------------------------------------------------------
