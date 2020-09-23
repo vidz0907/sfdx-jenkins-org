@@ -45,7 +45,7 @@ node {
 		}
 		//Run Powersehll Sript
 		stage('Run powershell') {
-			rc = command ".\run_import_script.ps1"
+			rc = command ".\powershell.ps1"
 		    if (rc != 0) {
 			error 'Powershell failed'
 		    }
