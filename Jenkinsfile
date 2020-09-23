@@ -48,11 +48,12 @@ node {
 		}
 		//Run Powershell Sript
 		stage('Run powershell') {
+			bat 'git diff-tree --no-commit-id --name-only -r head^ head > ChangedFilesList.txt'
 			//powershell.exe -noexit -file "GitDiffScript.ps1"
 			//bat label: '', script: ''' powershell .\\ScriptPowershell.ps1 ''' 
  			//PowerShell(". '.\\GitDiffScript.ps1'")
-			def msg = powershell(returnStdout: true, script: '.\\GitDiffScript.ps1.ps1')"
-			println msg
+			//def msg = powershell(returnStdout: true, script: '.\\GitDiffScript.ps1')"
+			//println msg
 		    //if (rc != 0) {
 			//error 'Powershell failed'
 		    }
