@@ -48,10 +48,13 @@ node {
 		}
 		//Run Powershell Sript
 		stage('Run powershell') {
-			rc = command "PowerShell(". '.\\ScriptPowershell.ps1'")"
+			bat "git log"
+			bat "git diff-tree --no-commit-id --name-only -r head^ head > list.txt"
+			//bat label: '', script: ''' powershell .\\ScriptPowershell.ps1 ''' 
+ 			//rc = command "PowerShell(". '.\\ScriptPowershell.ps1'")"
 			//rc = command "def msg = powershell(returnStdout: true, script: '.\\ScriptPowershell.ps1') | println msg "
-		    if (rc != 0) {
-			error 'Powershell failed'
+		    //if (rc != 0) {
+			//error 'Powershell failed'
 		    }
 		}
 		
