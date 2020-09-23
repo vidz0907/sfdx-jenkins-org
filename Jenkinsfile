@@ -57,7 +57,7 @@ node {
 		// Run Copy Delta files Script  
 		// -------------------------------------------------------------------------
 		stage('Copy Delta Files') {
-		    rc = command "${pythontool}/python .\copyDeltaFiles.py"
+		    rc = command "${pythontool}/python copyDeltaFiles.py"
 		    if (rc != 0) {
 			error 'copy files script failed'
 		    }
