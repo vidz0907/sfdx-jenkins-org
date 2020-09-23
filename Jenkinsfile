@@ -17,7 +17,7 @@ node {
 
 
     // -------------------------------------------------------------------------
-    // Check out code from source control.
+    // Check out code from source control GIT
     // -------------------------------------------------------------------------
 
     stage('checkout source') {
