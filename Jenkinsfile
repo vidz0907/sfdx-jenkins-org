@@ -45,7 +45,7 @@ node {
 		}
 		//Run Powersehll Sript - CHNAGE HERE
 		stage('Run powershell') {
-			bat 'powershell -command "git diff-tree --no-commit-id --name-only -r head^ head > ChangedFilesList.txt"'
+			bat 'powershell -command "git diff-tree --no-commit-id --name-only -r head^ head > list.txt"'
 			bat 'python copyDeltaFiles.py'
 			bat 'groovy PackageXMLGenerator.groovy delta/force-app/main/default delta/force-app/main/default/package.xml'
 			//rc = command "powershell returnStatus: true, script: '.\\ScriptPowershell.ps1'"
