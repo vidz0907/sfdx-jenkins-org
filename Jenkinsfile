@@ -14,22 +14,22 @@ node {
 	println SF_CONSUMER_KEY
 	println SERVER_KEY_CREDENTIALS_ID
 
-	//def PowerShell(psCmd) {
-    //psCmd=psCmd.replaceAll("%", "%%")
-    //bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$psCmd;EXIT \$global:LastExitCode\""
-	//}
+	def PowerShell(psCmd) {
+    psCmd=psCmd.replaceAll("%", "%%")
+    bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$psCmd;EXIT \$global:LastExitCode\""
+	}
 
     // -------------------------------------------------------------------------
     // Check out code from source control GIT
     // -------------------------------------------------------------------------
 
-    stage('checkout source') {
-        checkout scm
-    }
+    //stage('checkout source') {
+    //    checkout scm
+    //}
 
 
     // -------------------------------------------------------------------------
-    // Run all the enclosed stages with access to the Salesforce
+    // Run all the enclosed stages with access to the Salesforce org
     // JWT key credentials.
     // -------------------------------------------------------------------------
 
@@ -48,15 +48,15 @@ node {
 		}
 		//Run Powershell Sript
 		stage('Run powershell') {
-			bat 'git diff-tree --no-commit-id --name-only -r head^ head > ChangedFilesList.txt'
+			//no commnasds
 			//powershell.exe -noexit -file "GitDiffScript.ps1"
 			//bat label: '', script: ''' powershell .\\ScriptPowershell.ps1 ''' 
  			//PowerShell(". '.\\GitDiffScript.ps1'")
-			//def msg = powershell(returnStdout: true, script: '.\\GitDiffScript.ps1')"
+			//def msg = powershell(returnStdout: true, script: '.\\GitDiffScript.ps1.ps1')"
 			//println msg
 		    //if (rc != 0) {
 			//error 'Powershell failed'
-		    //}
+		    }
 		}
 		
 		// -------------------------------------------------------------------------
