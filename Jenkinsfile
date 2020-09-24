@@ -73,7 +73,7 @@ node {
 
 		stage('Check Only Deploy') {
 		    //rc = command "${toolbelt}/sfdx force:mdapi:deploy --checkonly --wait 10 --deploydir ${DEPLOYDIR} --targetusername UAT --testlevel ${TEST_LEVEL}"
-		    "${toolbelt}/sfdx force:mdapi:deploy -d --checkonly delta/force-app/main/default -w 30"
+		    rc = command "${toolbelt}/sfdx force:mdapi:deploy -d --checkonly delta/force-app/main/default -w 30"
 			if (rc != 0) {
 		        error 'Salesforce deploy failed.'
 		   }
