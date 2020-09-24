@@ -23,9 +23,9 @@ node {
     // Check out code from source control GIT
     // -------------------------------------------------------------------------
 
-    //stage('checkout source') {
-    //    checkout scm
-    //}
+    stage('checkout source') {
+        checkout scm
+    }
 
 
     // -------------------------------------------------------------------------
