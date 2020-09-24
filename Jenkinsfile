@@ -51,7 +51,7 @@ node {
 			//rc = command "powershell returnStatus: true, script: '.\\ScriptPowershell.ps1'"
 		    //if (rc != 0) {
 			//error 'Powershell failed'
-		    }
+		    //}
 		}
 		
 		// -------------------------------------------------------------------------
@@ -77,9 +77,9 @@ node {
 		//        error 'Salesforce deploy failed.'
 		//    }
 		//}
-	    }
+	    //}
 	}
-}
+}	
 
 def command(script) {
     if (isUnix()) {
