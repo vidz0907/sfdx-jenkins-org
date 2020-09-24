@@ -36,21 +36,22 @@ stages{
 		// -------------------------------------------------------------------------
 		// Authenticate to Salesforce using the server key.
 		// -------------------------------------------------------------------------
-
-			rc = command "${toolbelt}/sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --jwtkeyfile ${server_key_file} --username ${SF_USERNAME} --setalias vscodeOrg"
-		    if (rc != 0) {
-			error 'Salesforce org authorization failed.'
-		    }
+			bat "${toolbelt}/sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --jwtkeyfile ${server_key_file} --username ${SF_USERNAME} --setalias vscodeOrg"
+			//rc = command "${toolbelt}/sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --jwtkeyfile ${server_key_file} --username ${SF_USERNAME} --setalias vscodeOrg"
+		    //if (rc != 0) {
+			//error 'Salesforce org authorization failed.'
+		    //}
 		}
 		}
 		}
 		}
 		stage('Deploy and Run Tests') {
 		steps{
-			rc = command "${toolbelt}/sfdx force:mdapi:deploy -d delta/force-app/main/default -w 30"
-		    if (rc != 0) {
-			error 'Salesforce deploy and test run failed.'
-		    }
+			bat  "${toolbelt}/sfdx force:mdapi:deploy -d delta/force-app/main/default -w 30"
+			//rc = command "${toolbelt}/sfdx force:mdapi:deploy -d delta/force-app/main/default -w 30"
+		    //if (rc != 0) {
+			//error 'Salesforce deploy and test run failed.'
+		    //}
 		}
 		}
 }
